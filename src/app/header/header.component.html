@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="expanded-toolbar">
+     <span>
+      <button mat-button >SCart</button>
+        </span>
+       <!-- <span class="title-center"></span> -->
+        
+          <input *ngIf="loggedIn" placeholder="Search Products" 
+           type="text" id="search" class="search" >
+          
+          <span>
+            <button mat-button *ngIf="loggedIn"><span>
+              <span class="material-icons" style="font-size:15px;">
+                account_circle
+                </span>
+              Welcome {{userName}}
+            </span>
+          <div>
+            <span class="material-icons" style="font-size:15px;">
+              shopping_cart
+              </span> {{total}}
+          </div></button>
+              </span>
+     </mat-toolbar>

@@ -1,0 +1,75 @@
+<div class="col-md-12 flex">
+    <div class="row">
+     
+        
+      <div class="col-md-3 left_col">
+        <div class="row filter">
+            <span class="col-md-2 offset-md-4"> Filters</span>
+            <span class="col-md-5 offset-md-1 cursor" (click)="resetFilter()"><span class="material-icons" style="font-size:18px">
+                refresh
+                </span><span >Reset Filters</span></span>
+        </div>
+        <div class="row" class="col-md-12 color_div">
+        <div class="label-color">
+            Colour
+        </div>
+            <div class="col-md-6 inline_block" *ngFor="let colour of filterObj.colourArray">
+            <label>{{colour.label}}</label>
+            <input type="checkbox"  [(ngModel)]="colour.value" class="checkbox-style inline_block"  (change)="applyFilters()">
+          </div>
+        </div>
+        <div class="row" class="col-md-12 discount_div">
+            <div class="col-md-12 label-color">
+                Discount
+            </div>
+          <div class="col-md-4 inline_block" *ngFor="let discount of filterObj.discount">
+            <label>{{discount.label}}</label>
+            <input type="checkbox"  class="checkbox-style" [(ngModel)]="discount.value" (change)="applyFilters()">
+          </div>
+        </div>
+        <div class="row" class="col-md-12 price_filter">
+        <div class="label-color">
+        <span  class="labelBottom">Price</span>    
+      
+        
+          <input type="text" class="col-md-9 priceInput" [(ngModel)]="minValue"  placeholder="Min Value">
+          <input type="text" class="col-md-9  priceInput"  style="margin-top:1rem;" [(ngModel)]="maxValue"  placeholder="Max Value">
+          <button type="button" class="btn btn-primary col-md-9 submit_btn"  (click)="applyFilters()">Submit</button>
+        </div>
+    </div>
+      </div>
+      <div class="col-md-9">
+        
+        <div class="loading-indicator col-md-12" *ngIf="loading">
+    <mat-progress-spinner ></mat-progress-spinner>
+  </div>
+  
+  <ng-container *ngIf="!loading">
+    <div class="col-md-3 card"  *ngFor="let product of products">
+      <mat-card>
+        <mat-card-content>
+          <img style="justify-content: center;" mat-card-lg-image [src]="product.image">
+        </mat-card-content>
+  
+      </mat-card>
+      <div class="row">
+        <p class="col-md-8 padding_16" >{{product.title}}</p>
+        <p class="col-md-3 padding_16" ><input type="color" [value]="product.colour.color"></p>
+      </div>
+      <div class="row">
+        <p class="col-md-8 padding_16" >{{product.brand}}</p>
+        <p class="col-md-3 cursor padding_16 " (click)="addTotal()" ><span class="material-icons">
+          add_circle
+          </span></p>
+      </div>
+      <div class="row">
+        <p class="col-md-9 padding_16" >{{product.price.final_price | currency}}</p>
+      </div>
+    </div>
+  </ng-container>
+  
+  
+      </div>
+    </div>
+  
+  </div>
